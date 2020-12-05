@@ -1,10 +1,11 @@
 # default
 
 ## 需要导入的包
+```
 npm install vue-router
 npm install xlsx
 npm i element-ui -S
-
+```
 ## Project setup
 ```
 npm install
