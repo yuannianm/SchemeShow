@@ -59,7 +59,7 @@ Vue.prototype.post = post;
 
 //Router
 import Mis from "./components/Mis.vue"
-import MisCase from "./components/MisCase.vue"
+import MisSchemeList from "./components/MisSchemeList.vue"
 const router = new VueRouter({
 	routes: [
 		{
@@ -71,21 +71,16 @@ const router = new VueRouter({
 			component: Mis
 		},
 		{
-			path: '/miscase',
-			component: MisCase
+			path: '/misschemelist',
+			component: MisSchemeList
 		}
 	]
 })
 
-//Vuex
-import Vuex from 'vuex'
-Vue.use(Vuex)
+
 
 Vue.config.productionTip = false
 
-//x2js
-import x2js from 'x2js'
-Vue.prototype.$x2js = new x2js()
 
 new Vue({
 	render: h => h(App),
