@@ -1,16 +1,23 @@
 <template>
 	<div>
-		<el-upload class="upload-mis" drag action="/" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" :file-list="files" :on-change="handleChange">
+		<el-upload class="upload-mis" drag action="#" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" :file-list="files" :on-change="handleChange">
 			<i class="el-icon-upload"></i>
 			<div class="el-upload__text">将文件拖到此处,或<em>点击上传</em></div>
 			<div class="el-upload__tip" slot="tip">只能上传xls/xlsx文件</div>
 		</el-upload>
+		{{Uploadmessage}}
 	</div>
 </template>
 
 <script>
 	import XLSX from 'xlsx'
 	export default {
+		data(){
+			let	Uploadmessage=""
+			return {
+				Uploadmessage
+				}
+		},
 		methods: {
 			handleChange(file) {
 				var reader = new FileReader();
@@ -25,9 +32,9 @@
 					//console.log(XLSX.utils.sheet_to_json(worksheet,{header:1}));
 					let sheme={"schemeName":file.name.split('.xls')[0]};					
 					sheme.body=XLSX.utils.sheet_to_json(worksheet,{header:1});
-					let reqUrl="http://localhost:8080/api/sendscheme";
-					this.post(reqUrl,sheme).then(resp=>{
-					 console.log(sheme)
+					let reqUrl="http://localhost:8080";
+					this.post(reqUrl+"/api/sendscheme",sheme).then(resp=>{
+					 this.Uploadmessage="upload "+resp;
 					  }).catch((resp)=>{
 					  console.log(resp)
 					});
