@@ -5,6 +5,7 @@
 npm install vue-router
 npm install xlsx
 npm i element-ui -S
+npm i axios
 ```
 ## Project setup
 ```
