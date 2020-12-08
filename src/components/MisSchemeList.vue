@@ -10,7 +10,6 @@
 		let reqUrl="http://localhost:8080";
 		let data=[];
 		this.get(reqUrl+"/api/getscheme").then(resp=>{
-			resp[0].children=[{"label":"label2"}]
 					 this.data=resp
 					  }).catch((resp)=>{
 					  console.log(resp)
