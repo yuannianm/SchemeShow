@@ -1,11 +1,15 @@
 <template>
 	<div>
-		<h1>MisSchemeList</h1>
-		<el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+		<el-tree :data="data" :props="defaultProps" ></el-tree>
 	</div>
 </template>
 <script>
   export default {
+	watch: {
+	  	'$store.state.uploadSta':function() {
+	  		this.$router.go(0)
+	  	}
+	  },
     data() {
 		let reqUrl="http://localhost:8080";
 		let data=[];
@@ -20,11 +24,6 @@
         data
 		}
     },
-    methods: {
-      handleNodeClick(data) {
-        console.log(data);
-      }
-    }
   };
 </script>
 

@@ -1,9 +1,19 @@
 <template>
 	<div>
-		<el-upload class="upload-mis" drag action="#" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"  :http-request="handleUpload">
-			<i class="el-icon-upload"></i>
-			<div class="el-upload__text">将文件拖到此处,或<em>点击上传</em></div>
-			<div class="el-upload__tip" slot="tip">只能上传xls/xlsx文件</div>
+		<el-upload
+		  class="upload-demo"
+		  action="#"
+		  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+		  :on-preview="handlePreview"
+		  :on-remove="handleRemove"
+		  :before-remove="beforeRemove"
+		  multiple
+		  :limit="3"
+		  :on-exceed="handleExceed"
+		  :http-request="handleUpload"
+		  :file-list="fileList">
+		  <el-button size="small" type="primary">点击上传Excel方案</el-button>
+		  <div slot="tip" class="el-upload__tip">只能上传xls/xlsx文件</div>
 		</el-upload>
 		{{Uploadmessage}}
 	</div>
@@ -32,9 +42,14 @@
 					sheme.body=XLSX.utils.sheet_to_json(worksheet,{header:1});
 					let reqUrl="http://localhost:8080";
 					this.post(reqUrl+"/api/sendscheme",sheme).then(resp=>{
-					 this.Uploadmessage="upload "+resp;
+						if(resp.toString()=="true"){
+							this.$store.commit('changeUpload');
+							this.Uploadmessage="上传成功";
+						}else{
+							this.Uploadmessage="上传失败";
+						}
 					  }).catch((resp)=>{
-					  this.Uploadmessage="upload "+resp;
+					  "fali!"
 					});
 				}
 				reader.readAsArrayBuffer(param.file)
