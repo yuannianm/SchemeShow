@@ -40,16 +40,17 @@
 					var worksheet = workbook.Sheets[first_sheet_name];
 					let sheme={"schemeName":param.file.name.split('.xls')[0]};					
 					sheme.body=XLSX.utils.sheet_to_json(worksheet,{header:1});
-					let reqUrl="http://localhost:8080";
-					this.post(reqUrl+"/api/sendscheme",sheme).then(resp=>{
+					let reqUrl='http://122.9.97.197:8080'
+					this.post(reqUrl+'/api/sendscheme',sheme).then(resp=>{
 						if(resp.toString()=="true"){
 							this.$store.commit('changeUpload');
 							this.Uploadmessage="上传成功";
 						}else{
 							this.Uploadmessage="上传失败";
+							console.log(resp)
 						}
 					  }).catch((resp)=>{
-					  "fali!"
+					  console.log(resp)
 					});
 				}
 				reader.readAsArrayBuffer(param.file)

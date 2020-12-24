@@ -11,9 +11,10 @@
 	  	}
 	  },
     data() {
-		let reqUrl="http://localhost:8080";
+		let reqUrl="http://122.9.97.197:8080";
+		console.log(reqUrl+"123")
 		let data=[];
-		this.get(reqUrl+"/api/getscheme").then(resp=>{
+		this.get(reqUrl+'/api/getscheme').then(resp=>{
 					 this.data=resp
 					  }).catch((resp)=>{
 					  console.log(resp)
